@@ -1,0 +1,11 @@
+touch .gitignore
+```
+
+Contenu :
+```
+venv/
+data/
+images/
+*.csv
+__pycache__/
+.DS_Store
