@@ -5,6 +5,8 @@ Contenu :
 ```
 venv/
 data/
+env/
+*.zip
 images/
 *.csv
 __pycache__/
