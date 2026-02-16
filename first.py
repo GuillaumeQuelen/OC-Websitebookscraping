@@ -33,13 +33,9 @@ def book_data(url):
     number_available = soup.find("th", string="Availability").find_next("td").text.strip()
     data["Disponibilité"] = number_available.split("(")[0].strip()
 
-    # Description
-    desc_div = soup.find("div", id="Product Description")
-    if desc_div:
-        product_description = desc_div.find_next("p").text.strip()
-    else:
-        product_description = "Sans description"
-    data["Description"] = product_description
+    # Description du produit
+    product_description = soup.find("p", attrs={False: True}).text.strip() if soup.find("article", class_="product_page") else "No description"
+    data["product_description"] = product_description
 
     # Categories
     data["Catégorie"] = soup.find("ul", class_="breadcrumb").find_all("a")[2].text.strip()
@@ -52,7 +48,7 @@ def book_data(url):
         "Four": 4,
         "Five": 5
     }
-    rating_tag = soup.find("p", class_="star-rating")
+    rating_tag = soup.find("<p>", class_="star-rating")
     data["Note des lecteurs"] = None
     if rating_tag:
         for cls in rating_tag.get("class", []):
